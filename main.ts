@@ -1,0 +1,21 @@
+import { App, staticFiles } from "fresh";
+import { define, type State } from "./utils.ts";
+
+export const app = new App<State>();
+
+app.use(staticFiles());
+
+// Pass a shared value from a middleware
+// app.use(async (ctx) => {
+//   ctx.state.shared = "hello";
+//   return await ctx.next();
+// });
+
+const logger = define.middleware((ctx) => {
+  console.log(`${ctx.req.method} ${ctx.req.url}`);
+  return ctx.next();
+});
+app.use(logger);
+
+// Include file-system based routes here
+app.fsRoutes();
