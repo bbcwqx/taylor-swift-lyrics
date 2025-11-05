@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   ci:
-    name: Check
+    name: CI
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
@@ -35,13 +35,13 @@ jobs:
         run: |
           deno fmt --check
 
-      - name: Type Check
-        run: |
-          deno check
-
       - name: Build Database
         run: |
           ./scripts/build-db.sh
+
+      - name: Type Check
+        run: |
+          deno check
 
       - name: Build
         run: |
