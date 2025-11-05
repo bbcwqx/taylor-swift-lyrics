@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+          cache: true
+
+      - name: Deno Install
+        run: |
+          deno install --frozen
+
+      - name: Lint
+        run: |
+          deno lint
+
+      - name: Check Formatting
+        run: |
+          deno fmt --check
+
+      - name: Type Check
+        run: |
+          deno check
+
+      - name: Build Database
+        run: |
+          ./scripts/build-db.sh
+
+      - name: Build
+        run: |
+          deno task build
