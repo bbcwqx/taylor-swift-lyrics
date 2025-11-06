@@ -40,10 +40,28 @@ export default define.page<typeof handler>(function SongPage(props) {
     );
   };
 
+  const ogImageUrl = highlightId && searchQuery
+    ? `/og/songs/${song.song_id}?highlight=${highlightId}&q=${
+      encodeURIComponent(searchQuery)
+    }`
+    : `/og/songs/${song.song_id}`;
+
   return (
     <div class="px-4 py-8 mx-auto min-h-screen">
       <Head>
         <title>{song.song_name} - {song.album_name}</title>
+        <meta
+          property="og:title"
+          content={`${song.song_name} - ${song.album_name}`}
+        />
+        <meta property="og:type" content="music.song" />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content={`${song.song_name} - ${song.album_name}`}
+        />
+        <meta name="twitter:image" content={ogImageUrl} />
         {highlightId && (
           <script
             // deno-lint-ignore react-no-danger

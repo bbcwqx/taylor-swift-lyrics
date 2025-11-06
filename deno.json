@@ -12,10 +12,12 @@
     "@preact/signals": "npm:@preact/signals@^2.3.2",
     "@sqlite.org/sqlite-wasm": "npm:@sqlite.org/sqlite-wasm@^3.50.4-build1",
     "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.12",
+    "@vercel/og": "npm:@vercel/og@^0.8.5",
     "basecoat-css": "npm:basecoat-css@^0.3.2",
     "fresh": "jsr:@fresh/core@^2.1.4",
     "lucide-preact": "npm:lucide-preact@^0.552.0",
     "preact": "npm:preact@^10.27.2",
+    "satori": "npm:satori@^0.18.3",
     "vite": "npm:vite@^7.1.3",
     "tailwindcss": "npm:tailwindcss@^4.1.10"
   },

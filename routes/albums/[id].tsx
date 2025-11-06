@@ -23,6 +23,12 @@ export default define.page<typeof handler>(function AlbumPage(props) {
     <div class="px-4 py-8 mx-auto min-h-screen">
       <Head>
         <title>{album.name} - Taylor Swift</title>
+        <meta property="og:title" content={`${album.name} - Taylor Swift`} />
+        <meta property="og:type" content="music.album" />
+        <meta property="og:image" content={`/og/albums/${album.id}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${album.name} - Taylor Swift`} />
+        <meta name="twitter:image" content={`/og/album/${album.id}`} />
       </Head>
       <div class="w-full max-w-6xl mx-auto pt-6 px-6">
         <BackLink href="/">Back to search</BackLink>
