@@ -41,10 +41,13 @@ export default define.page<typeof handler>(function SongPage(props) {
   };
 
   const ogImageUrl = highlightId && searchQuery
-    ? `${origin}/og/songs/${song.song_id}?highlight=${highlightId}&q=${encodeURIComponent(searchQuery)}`
+    ? `${origin}/og/songs/${song.song_id}?highlight=${highlightId}&q=${
+      encodeURIComponent(searchQuery)
+    }`
     : `${origin}/og/songs/${song.song_id}`;
 
-  const ogDescription = `Lyrics for "${song.song_name}" from ${song.album_name}`;
+  const ogDescription =
+    `Lyrics for "${song.song_name}" from ${song.album_name}`;
 
   return (
     <div class="px-4 py-8 mx-auto min-h-screen">
@@ -150,7 +153,13 @@ export const handler = define.handlers({
     } catch (err) {
       console.error("Error fetching song details:", err);
       return {
-        data: { song: null, lyrics: [], highlightId: null, searchQuery: null, origin },
+        data: {
+          song: null,
+          lyrics: [],
+          highlightId: null,
+          searchQuery: null,
+          origin,
+        },
       };
     }
   },

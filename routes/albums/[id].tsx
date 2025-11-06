@@ -20,7 +20,9 @@ export default define.page<typeof handler>(function AlbumPage(props) {
   }
 
   const ogImageUrl = origin + `/og/albums/${album.id}`;
-  const ogDescription = `Browse all ${songs.length} ${songs.length === 1 ? "song" : "songs"} from ${album.name}`;
+  const ogDescription = `Browse all ${songs.length} ${
+    songs.length === 1 ? "song" : "songs"
+  } from ${album.name}`;
 
   return (
     <div class="px-4 py-8 mx-auto min-h-screen">
