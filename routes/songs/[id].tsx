@@ -4,7 +4,7 @@ import { getSongDetails } from "../../lib/db-server.ts";
 import BackLink from "../../components/BackLink.tsx";
 
 export default define.page<typeof handler>(function SongPage(props) {
-  const { song, lyrics, highlightId, searchQuery } = props.data;
+  const { song, lyrics, highlightId, searchQuery, origin } = props.data;
 
   if (!song) {
     return (
@@ -41,10 +41,10 @@ export default define.page<typeof handler>(function SongPage(props) {
   };
 
   const ogImageUrl = highlightId && searchQuery
-    ? `/og/songs/${song.song_id}?highlight=${highlightId}&q=${
-      encodeURIComponent(searchQuery)
-    }`
-    : `/og/songs/${song.song_id}`;
+    ? `${origin}/og/songs/${song.song_id}?highlight=${highlightId}&q=${encodeURIComponent(searchQuery)}`
+    : `${origin}/og/songs/${song.song_id}`;
+
+  const ogDescription = `Lyrics for "${song.song_name}" from ${song.album_name}`;
 
   return (
     <div class="px-4 py-8 mx-auto min-h-screen">
@@ -54,6 +54,7 @@ export default define.page<typeof handler>(function SongPage(props) {
           property="og:title"
           content={`${song.song_name} - ${song.album_name}`}
         />
+        <meta property="og:description" content={ogDescription} />
         <meta property="og:type" content="music.song" />
         <meta property="og:image" content={ogImageUrl} />
         <meta name="twitter:card" content="summary_large_image" />
@@ -61,6 +62,7 @@ export default define.page<typeof handler>(function SongPage(props) {
           name="twitter:title"
           content={`${song.song_name} - ${song.album_name}`}
         />
+        <meta name="twitter:description" content={ogDescription} />
         <meta name="twitter:image" content={ogImageUrl} />
         {highlightId && (
           <script
@@ -126,6 +128,7 @@ export const handler = define.handlers({
     const id = ctx.params.id;
     const highlightParam = ctx.url.searchParams.get("highlight");
     const searchQuery = ctx.url.searchParams.get("q");
+    const origin = ctx.url.origin;
 
     try {
       const songId = parseInt(id, 10);
@@ -136,17 +139,18 @@ export const handler = define.handlers({
             lyrics: [],
             highlightId: null,
             searchQuery: null,
+            origin,
           },
         };
       }
 
       const highlightId = highlightParam ? parseInt(highlightParam, 10) : null;
       const { song, lyrics } = await getSongDetails(songId);
-      return { data: { song, lyrics, highlightId, searchQuery } };
+      return { data: { song, lyrics, highlightId, searchQuery, origin } };
     } catch (err) {
       console.error("Error fetching song details:", err);
       return {
-        data: { song: null, lyrics: [], highlightId: null, searchQuery: null },
+        data: { song: null, lyrics: [], highlightId: null, searchQuery: null, origin },
       };
     }
   },
