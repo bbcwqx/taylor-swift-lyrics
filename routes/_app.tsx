@@ -6,7 +6,8 @@ export default define.page(function App({ Component }) {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>temp</title>
+        <title>Taylor Swift Lyrics</title>
+        <link rel="icon" href="https://fav.farm/🎤" />
       </head>
       <body>
         <Component />
