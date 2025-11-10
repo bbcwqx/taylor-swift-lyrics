@@ -3,13 +3,14 @@
     "check": "deno fmt --check . && deno lint . && deno check",
     "dev": "vite",
     "build": "vite build",
-    "start": "deno serve -A _fresh/server.js",
+    "start": "deno serve -A server.ts",
     "update": "deno run -A -r jsr:@fresh/update ."
   },
   "imports": {
     "@/": "./",
     "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.7",
     "@preact/signals": "npm:@preact/signals@^2.3.2",
+    "@resvg/resvg-js": "npm:@resvg/resvg-js@^2.6.2",
     "@sqlite.org/sqlite-wasm": "npm:@sqlite.org/sqlite-wasm@^3.50.4-build1",
     "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.12",
     "@vercel/og": "npm:@vercel/og@^0.8.5",
